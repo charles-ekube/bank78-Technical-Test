@@ -23,15 +23,12 @@
   font-weight: 500;
   line-height: 24px;
   letter-spacing: -0.08px;
+  background-color: inherit;
 }
 
 .customDropDownWrapper {
   transition: border-color 0.3s ease;
   position: relative;
-}
-
-.customDropDown.dropdownError {
-  border-color: #e71d36; /* Error border color */
 }
 
 .customDropDown {
@@ -43,6 +40,10 @@
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
+}
+
+.customDropDown.dropdownError {
+  border-color: #e71d36;
 }
 
 .customDropDown input {

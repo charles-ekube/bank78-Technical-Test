@@ -34,6 +34,14 @@ interface Errors {
     country?: string;
 }
 
+interface PasswordFeedbackType {
+    minLength: boolean;
+    upperCase: boolean;
+    number: boolean;
+    specialChar: boolean;
+    lowerCase: boolean;
+}
+
 
 
 const SignUp = () => {
@@ -50,6 +58,14 @@ const SignUp = () => {
     });
     const [loading, setLoading] = useState<boolean>(false);
     const [errors, setErrors] = useState<Errors>({});
+    const [passwordFeedback, setPasswordFeedback] = useState<PasswordFeedbackType>({
+        minLength: false,
+        upperCase: false,
+        number: false,
+        specialChar: false,
+        lowerCase: false,
+    });
+
 
     const { login } = useUser();
     const navigate = useNavigate();
@@ -57,7 +73,12 @@ const SignUp = () => {
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
-        setErrors({ ...errors, [name]: '' });
+        if (name === 'password') {
+            const passwordError = validatePassword(value);
+            setErrors({ ...errors, password: passwordError });
+        } else {
+            setErrors({ ...errors, [name]: '' });
+        }
     };
 
     const handleBusinessType = (businessType: { value: string }) => {
@@ -70,12 +91,53 @@ const SignUp = () => {
         setErrors({ ...errors, country: '' });
     };
 
+
+    const validatePassword = (password: string) => {
+        const minLength = 8;
+        const upperCasePattern = /[A-Z]/;
+        const numberPattern = /[0-9]/;
+        const specialCharPattern = /[!@#$%^&*(),.?":{}|<>]/;
+        const lowerCasePattern = /[a-z]/;
+
+        setPasswordFeedback({
+            minLength: password.length >= minLength,
+            upperCase: upperCasePattern.test(password),
+            number: numberPattern.test(password),
+            specialChar: specialCharPattern.test(password),
+            lowerCase: lowerCasePattern.test(password),
+        });
+
+        if (password.length < minLength) {
+            return 'Password must be at least 8 characters long';
+        }
+        if (!upperCasePattern.test(password)) {
+            return 'Password must contain at least one uppercase letter';
+        }
+        if (!numberPattern.test(password)) {
+            return 'Password must contain at least one number';
+        }
+        if (!specialCharPattern.test(password)) {
+            return 'Password must contain at least one special character';
+        }
+        if (!lowerCasePattern.test(password)) {
+            return 'Password must contain at least one lowercase letter';
+        }
+
+        return '';
+    };
+
+
     const validateForm = () => {
         const newErrors: Errors = {};
         if (!formData.firstName) newErrors.firstName = 'First name is required';
         if (!formData.lastName) newErrors.lastName = 'Last name is required';
         if (!formData.email) newErrors.email = 'Email is required';
-        if (!formData.password) newErrors.password = 'Password is required';
+        if (!formData.password) {
+            newErrors.password = 'Password is required';
+        } else {
+            const passwordError = validatePassword(formData.password);
+            if (passwordError) newErrors.password = passwordError;
+        }
         if (!formData.businessType) newErrors.businessType = 'Business type is required';
         if (!formData.country) newErrors.country = 'Country is required';
         if (!formData.businessName) newErrors.businessName = 'Business name is required';
@@ -111,7 +173,7 @@ const SignUp = () => {
                     </Text>
                     <Text tag={'p'}>
                         Already have an account?
-                        <Link to="/signup"> {/* Use the Link component for navigation */}
+                        <Link to="/">
                             <Text tag="a" className="">
                                 Log in
                             </Text>
@@ -224,6 +286,13 @@ const SignUp = () => {
                             error={!!errors.password}
                         />
                         {errors.password && <InputErrorContainer error={errors.password} />}
+                        <div className="passwordFeedback">
+                            <p className={passwordFeedback.minLength ? 'valid' : 'invalid'}>Minimum 8 characters</p>
+                            <p className={passwordFeedback.upperCase ? 'valid' : 'invalid'}>At least one uppercase letter</p>
+                            <p className={passwordFeedback.number ? 'valid' : 'invalid'}>At least one number</p>
+                            <p className={passwordFeedback.specialChar ? 'valid' : 'invalid'}>At least one special character</p>
+                            <p className={passwordFeedback.lowerCase ? 'valid' : 'invalid'}>At least one lowercase letter</p>
+                        </div>
                     </div>
 
                     <button type="submit" className="signupButton" disabled={loading}>
