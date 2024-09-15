@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import { Globe, Logo } from '../../assets/images/Index'
+import { Globe, Logo, Slider } from '../../assets/images/Index'
 import '../../assets/styles/authStyles.css';
 import Text from '../../utils/CustomText';
 
@@ -21,8 +21,9 @@ const AuthContainer = (props: AuthContainerProps) => {
                     <Text tag={'h4'}>
                         One global bank, every way your money moves
                     </Text>
+                    <img src={Slider} alt='slider' />
                 </div>
-                <div>
+                <div className={'formContentContainer'}>
                     {children}
                 </div>
             </section>

@@ -7,11 +7,12 @@ interface CustomDropDownProps {
     selectData: (item: Option) => void;
     data?: string | null;
     label: string;
+    error?: boolean;
 }
 
 const CustomDropDown = (props: CustomDropDownProps) => {
     const [open, setOpen] = useState<boolean>(false);
-    const { selectData, data, label, options } = props;
+    const { selectData, data, label, options, error } = props;
     const [inputValue, setInputValue] = useState<string>(data || '');
 
     const toggler = () => {
@@ -29,9 +30,9 @@ const CustomDropDown = (props: CustomDropDownProps) => {
     };
 
     return (
-        <div className="customDropDownWrapper">
-            <label className="customDropDownLabel">{label}</label>
-            <div className="customDropDown" onClick={toggler}>
+        <div className={`customDropDownWrapper `}>
+            <label className={"customDropDownLabel"}>{label}</label>
+            <div className={`customDropDown ${error ? 'dropdownError' : ''}`} onClick={toggler}>
                 <input
                     type="text"
                     value={inputValue}

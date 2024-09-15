@@ -7,21 +7,29 @@ interface CustomInputProps extends InputHTMLAttributes<HTMLInputElement> {
     customInputContainer?: string;
     inputStyle?: string;
     icon?: ReactNode;
+    error?: boolean;
 }
 
 const CustomInput = (props: CustomInputProps) => {
-    const { label, type, name, value, onChange, placeholder, disabled, icon, customLabel,
-        inputStyle, customInputContainer, ...otherProps } = props
+    const { label, type, name, value, onChange, placeholder, disabled, icon,
+        customInputContainer, error, ...otherProps } = props;
+
+
     return (
-        <div className={`inputContainer ${customInputContainer}`}>
+        <div className={`${customInputContainer}`}>
             {label && (
-                <label className={`${customLabel}`}>
+                <label className={'inputLabel'}>
                     {label}
                 </label>
             )}
-            <div className={`input flexRow alignCenter justifyBetween ${inputStyle}`}>
-                <input type={type} name={name} value={value} onChange={onChange}
-                    placeholder={placeholder} className={'inputBox'}
+            <div className={`input ${error ? 'inputError' : ''}`}>
+                <input
+                    type={type}
+                    name={name}
+                    value={value}
+                    onChange={onChange}
+                    placeholder={placeholder}
+                    className={`inputBox`}
                     disabled={disabled}
                     {...otherProps}
                 />
