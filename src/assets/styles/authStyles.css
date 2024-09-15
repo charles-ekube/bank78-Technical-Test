@@ -1,0 +1,52 @@
+.authContainer {
+  padding: 20px;
+}
+
+.formContainer {
+  background-color: rgb(255, 255, 255);
+  box-sizing: border-box;
+  width: 100%;
+  margin: 40px 0;
+  padding: 40px 20px;
+}
+
+.formImageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  display: none;
+}
+.formImageContainer h4 {
+  font-size: 40px;
+  line-height: 42px;
+  color: #002242;
+  text-align: center;
+  margin: 0px;
+}
+
+.formContentHeader {
+  padding: 20px 0 40px 0;
+}
+.inputGroup {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 0 16px;
+}
+
+@media screen and (min-width: 768px) {
+  .formContainer {
+    max-width: 1000px;
+    margin: 40px auto;
+    border-radius: 24px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 40px 80px;
+  }
+  .formImageContainer {
+    display: inline-block;
+  }
+  .inputGroup {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
