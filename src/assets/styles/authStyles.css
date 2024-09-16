@@ -3,14 +3,13 @@
 }
 
 .formContainer {
-  margin-top: 40px;
+  margin-top: 20px;
 }
 .formContentContainer {
   /* */
   background-color: inherit;
   box-sizing: border-box;
   width: 100%;
-  padding: 40px 20px;
 }
 
 .formImageContainer {
@@ -48,6 +47,7 @@
 
 .passwordFeedback p {
   margin: 4px 0;
+  font-size: 12px;
 }
 
 .passwordFeedback .valid {
@@ -55,7 +55,7 @@
 }
 
 .passwordFeedback .invalid {
-  color: red;
+  color: #000;
 }
 
 .inputGroup {

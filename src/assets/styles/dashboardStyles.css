@@ -1,0 +1,97 @@
+.dashNav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.navAvatarContainer {
+  position: relative;
+  border-radius: 100px;
+  background: #fff;
+  width: 48px;
+  height: 48px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0.15px 1.5px 3px 0px;
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 14px;
+}
+.dashNavRightContainer {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+
+.dashboardContainer {
+  padding: 20px;
+}
+
+.notificationBar {
+  padding: 10px 16px;
+  border-radius: 4px;
+  border: 1px solid;
+  background: linear-gradient(0deg, rgb(120, 80, 6), rgb(120, 80, 6));
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  color: #fff;
+  font-size: 14px;
+  line-height: 20px;
+}
+.notificationBar button {
+  background-color: inherit;
+  border: none;
+  text-decoration: underline;
+  color: #fff;
+}
+
+.dashboardContainer header {
+  padding: 20px 0;
+}
+.dashboardContainer header h4 {
+  color: rgb(52, 55, 63);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 25px;
+  letter-spacing: 0em;
+}
+.dashboardContainer header p {
+  color: rgb(129, 137, 158);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0em;
+  text-align: left;
+  margin: 7px 0px 0px;
+}
+
+.accountCard {
+  background-color: rgb(255, 255, 255);
+  border-radius: 16px;
+  border: 1px;
+  height: 100%;
+  min-width: 295px;
+}
+
+@media screen and (min-width: 768px) {
+  .dashNav {
+    padding: 20px 60px;
+  }
+  .dashboardContainer {
+    padding: 40px 60px;
+  }
+
+  .notificationBar {
+    flex-wrap: nowrap;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+}

@@ -96,3 +96,21 @@
 .button {
   border: none;
 }
+
+.loader {
+  height: 30px;
+  width: 30px;
+  border: 1px solid #ffffff;
+  border-radius: 50%;
+  border-top: #000000;
+  animation: circular-loader 2s linear infinite;
+}
+
+@keyframes circular-loader {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

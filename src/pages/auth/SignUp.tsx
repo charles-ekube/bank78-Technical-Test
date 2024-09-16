@@ -8,6 +8,7 @@ import { BusinessTypeOptions, CountryOptions, simpleHash } from '../../utils/Hel
 import { useAuth } from '../../context/AuthContext'
 import InputErrorContainer from '../../utils/InputErrorContainer'
 import { Errors } from '../../utils/GeneralTypes'
+import CustomButton from '../../utils/CustomButton'
 
 
 interface SignUpState {
@@ -295,9 +296,7 @@ const SignUp = () => {
                         </div>
                     </div>
 
-                    <button type="submit" className="signupButton" disabled={loading}>
-                        {loading ? 'Signing up...' : 'Sign Up'}
-                    </button>
+                    <CustomButton title={'Sign up'} type='submit' className={'authButton'} loading={loading} />
                 </form>
             </div>
         </AuthContainer>
