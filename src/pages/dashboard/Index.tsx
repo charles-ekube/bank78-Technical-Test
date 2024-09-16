@@ -100,7 +100,22 @@ const Dashboard = () => {
                         </div>
                     </div>
                     <div>
-
+                        <div className={'paymentCard'}>
+                            <div className={'mb-10'}>
+                                <Text tag={'h3'} className='mb-10'>Have bills to pay?</Text>
+                                <Text tag={'p'}>Seamlessly buy airtime, data, pay for electricity, water cable TV, subscriptions etc.</Text>
+                            </div>
+                            <CustomButton title='Make a payment' className={'paymentCardButton'} />
+                        </div>
+                        <div className={'transactionsCard'}>
+                            <header className={'flexRow alignCenter justifyBetween'}>
+                                <Text tag={'h3'} fs='20px' fw={700} color='#000'>Beneficiaries</Text>
+                                <Text tag={'p'} fs='16' color='rgb(74, 145, 243)' >Add</Text>
+                            </header>
+                            <div>
+                                <Text tag={'p'} fs='14px'>You have no beneficiaries yet.</Text>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
