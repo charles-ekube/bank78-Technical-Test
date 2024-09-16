@@ -64,6 +64,23 @@
   gap: 0 16px;
 }
 
+.authButton {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 15px;
+  background: rgb(0, 103, 199);
+  color: rgb(255, 255, 255);
+  border-radius: 25px;
+  padding: 15px 0px;
+  box-shadow: rgb(172, 235, 132) 4px -4px 0px 0px;
+  margin: 20px 0px 0px;
+  text-align: center;
+  width: 100%;
+  cursor: pointer;
+  white-space: nowrap;
+  opacity: 1;
+}
+
 @media screen and (min-width: 768px) {
   .formContainer {
     max-width: 1000px;

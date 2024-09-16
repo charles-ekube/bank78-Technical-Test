@@ -1,22 +1,22 @@
 import { ReactNode, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useUser } from '../context/ContextProvider';
+import { useAuth } from '../context/AuthContext';
 
 interface ProtectedRouteProps {
     children: ReactNode;
 }
 
 export default function ProtectedRoute(props: ProtectedRouteProps) {
-    const { user } = useUser();
+    const { currentUser } = useAuth();
     const navigate = useNavigate();
     const { children } = props
 
     useEffect(() => {
-        if (!user) {
+        if (!currentUser) {
             navigate('/');
         }
-    }, [user, navigate]);
+    }, [currentUser, navigate]);
 
     // If the user is logged in, render the children (protected content)
-    return <>{user ? children : null}</>;
+    return <>{currentUser ? children : null}</>;
 }

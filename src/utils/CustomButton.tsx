@@ -19,8 +19,7 @@ const CustomButton = (props: CustomButtonProps) => {
             onClick={onClick}
             disabled={disabled}
             name={name}
-            className={`button f16 semiBoldText ${customStyle}`}
-            style={{ backgroundColor: disabled ? '#68E8E3' : '#04D9D1' }}
+            className={`button ${customStyle}`}
             {...otherProps}
         >
             {!loading ? title : ''}

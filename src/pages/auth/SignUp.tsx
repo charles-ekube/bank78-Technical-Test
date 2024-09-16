@@ -4,9 +4,10 @@ import { Link, useNavigate } from 'react-router-dom'
 import Text from '../../utils/CustomText'
 import CustomInput from '../../utils/CustomInput'
 import CustomDropDown from '../../utils/CustomDropDown'
-import { BusinessTypeOptions, CountryOptions } from '../../utils/Helpers'
-import { useUser } from '../../context/ContextProvider'
+import { BusinessTypeOptions, CountryOptions, simpleHash } from '../../utils/Helpers'
+import { useAuth } from '../../context/AuthContext'
 import InputErrorContainer from '../../utils/InputErrorContainer'
+import { Errors } from '../../utils/GeneralTypes'
 
 
 interface SignUpState {
@@ -22,17 +23,6 @@ interface SignUpState {
 }
 
 
-interface Errors {
-    firstName?: string;
-    lastName?: string;
-    businessName?: string;
-    phoneNumber?: string;
-    email?: string;
-    password?: string;
-    cacNumber?: string;
-    businessType?: string;
-    country?: string;
-}
 
 interface PasswordFeedbackType {
     minLength: boolean;
@@ -41,8 +31,6 @@ interface PasswordFeedbackType {
     specialChar: boolean;
     lowerCase: boolean;
 }
-
-
 
 const SignUp = () => {
     const [formData, setFormData] = useState<SignUpState>({
@@ -66,8 +54,7 @@ const SignUp = () => {
         lowerCase: false,
     });
 
-
-    const { login } = useUser();
+    const { register } = useAuth();
     const navigate = useNavigate();
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -90,7 +77,6 @@ const SignUp = () => {
         setFormData({ ...formData, country: country.value });
         setErrors({ ...errors, country: '' });
     };
-
 
     const validatePassword = (password: string) => {
         const minLength = 8;
@@ -126,7 +112,6 @@ const SignUp = () => {
         return '';
     };
 
-
     const validateForm = () => {
         const newErrors: Errors = {};
         if (!formData.firstName) newErrors.firstName = 'First name is required';
@@ -155,10 +140,25 @@ const SignUp = () => {
             return;
         }
         setLoading(true);
+
         setTimeout(() => {
+            const hashedPassword = simpleHash(formData.password);
+            const newUser = {
+                firstName: formData.firstName,
+                lastName: formData.lastName,
+                businessName: formData.businessName,
+                phoneNumber: formData.phoneNumber,
+                email: formData.email,
+                password: hashedPassword,
+                cacNumber: formData.cacNumber,
+                businessType: formData.businessType || '',
+                country: formData.country || '',
+            };
+
+            register(newUser);
+            navigate('/');
+
             setLoading(false);
-            login(formData.email);
-            navigate('/login');
         }, 2000);
     };
 

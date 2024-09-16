@@ -3,8 +3,10 @@ import AuthContainer from '../../components/auth/AuthContainer';
 import CustomInput from '../../utils/CustomInput';
 import Text from '../../utils/CustomText';
 import { Link, useNavigate } from 'react-router-dom';
-import { useUser } from '../../context/ContextProvider';
 import InputErrorContainer from '../../utils/InputErrorContainer';
+import CustomButton from '../../utils/CustomButton';
+import { simpleHash } from '../../utils/Helpers';
+import { useAuth } from '../../context/AuthContext';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -12,7 +14,7 @@ const Login = () => {
     const [emailError, setEmailError] = useState<string | null>(null);
     const [passwordError, setPasswordError] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
-    const { login } = useUser();
+    const { login } = useAuth();
     const navigate = useNavigate();
 
     const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -23,6 +25,10 @@ const Login = () => {
     const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
         setPassword(e.target.value);
         setPasswordError(null);
+    };
+
+    const disabled = () => {
+        return email === '' || password === '' || emailError !== null || passwordError !== null || loading;
     };
 
     const validateForm = () => {
@@ -48,15 +54,21 @@ const Login = () => {
 
         setLoading(true);
         setTimeout(() => {
-            setLoading(false);
-            if (email === 'user@example.com' && password === 'password') {
-                login(email);
+            const hashedPassword = simpleHash(password);
+
+            const isLoggedIn = login(email, hashedPassword);
+
+            if (isLoggedIn) {
                 navigate('/dashboard');
             } else {
                 setPasswordError('Invalid email or password');
             }
+
+            setLoading(false);
         }, 2000);
     };
+
+
 
     return (
         <AuthContainer>
@@ -98,9 +110,7 @@ const Login = () => {
                         />
                         {passwordError && <InputErrorContainer error={passwordError} />}
                     </div>
-                    <button type='submit' className='loginButton' disabled={loading}>
-                        {loading ? 'Logging in...' : 'Log In'}
-                    </button>
+                    <CustomButton title={'Login'} type='submit' className={'authButton'} disabled={disabled()} loading={loading} />
                 </form>
             </div>
         </AuthContainer>
