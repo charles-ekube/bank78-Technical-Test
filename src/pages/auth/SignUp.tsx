@@ -154,6 +154,7 @@ const SignUp = () => {
                 cacNumber: formData.cacNumber,
                 businessType: formData.businessType || '',
                 country: formData.country || '',
+
             };
 
             register(newUser);

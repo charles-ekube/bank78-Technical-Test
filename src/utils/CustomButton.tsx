@@ -24,7 +24,7 @@ const CustomButton = (props: CustomButtonProps) => {
         >
             {!loading ? title : ''}
             {img && <img src={img} alt="icon" />}
-            {loading && <span className="loader"></span>}
+            {loading && <div className="loader"></div>}
         </button>
     );
 };

@@ -77,6 +77,42 @@
   min-width: 295px;
 }
 
+.documentsModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: flex-end !important;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.documentsModal.open {
+  opacity: 1;
+  visibility: visible;
+  align-items: center;
+}
+
+.documentsModalContent {
+  background: white;
+  width: 100%;
+  padding: 40px 20px;
+  border-radius: 16px 16px 0 0;
+  transform: translateY(100%);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+
+.documentsModal.open .documentsModalContent {
+  transform: translateY(0);
+  opacity: 1;
+}
+
 @media screen and (min-width: 768px) {
   .dashNav {
     padding: 20px 60px;
@@ -93,5 +129,16 @@
     align-items: center;
     max-width: 1000px;
     margin: 0 auto;
+  }
+
+  .documentsModal {
+    align-items: center;
+  }
+  .documentsModalContent {
+    max-width: 600px;
+    transform: translateY(0);
+    opacity: 1;
+    border-radius: 16px;
+    margin: auto;
   }
 }

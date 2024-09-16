@@ -1,26 +1,28 @@
 import { Option } from "./GeneralTypes";
 
+export const BusinessTypeOptions: Option[] = [{ key: "llc", value: "LLC" }];
 
-export const BusinessTypeOptions: Option[] = [
-  { key: 'retail', value: 'Retail' },
-  { key: 'manufacturing', value: 'Manufacturing' },
-  { key: 'technology', value: 'Technology' }
-];
+export const CountryOptions: Option[] = [{ key: "ng", value: "Nigeria" }];
 
+export const IDType: Option[] = [{ key: "nin", value: "NIN" }];
 
-export const CountryOptions: Option[] = [
-  { key: 'us', value: 'United States' },
-  { key: 'ng', value: 'Nigeria' },
-  { key: 'ca', value: 'Canada' }
-];
-
-
-export  const simpleHash = (input: string): string => {
+export const simpleHash = (input: string): string => {
   let hash = 0;
   for (let i = 0; i < input?.length; i++) {
     const char = input?.charCodeAt(i);
     hash = (hash << 5) - hash + char;
-    hash |= 0; 
+    hash |= 0;
   }
   return hash.toString();
+};
+
+export const fileToBase64 = (file: File): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      resolve(reader.result as string);
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
 };

@@ -17,6 +17,5 @@ export default function ProtectedRoute(props: ProtectedRouteProps) {
         }
     }, [currentUser, navigate]);
 
-    // If the user is logged in, render the children (protected content)
     return <>{currentUser ? children : null}</>;
 }

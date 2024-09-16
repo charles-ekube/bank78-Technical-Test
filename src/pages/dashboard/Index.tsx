@@ -5,11 +5,16 @@ import { Logo, NaijaFlag } from '../../assets/images/Index';
 import { Notification } from 'iconsax-react';
 import '../../assets/styles/dashboardStyles.css'
 import Text from '../../utils/CustomText';
+import DocumentUploadModal from '../../components/dashboard/DocumentUploadModal';
+import { useState } from 'react';
 
 const Dashboard = () => {
     const { currentUser } = useAuth();
     console.log(currentUser, 'user')
     const navigate = useNavigate();
+    const [isModalOpen, setModalOpen] = useState<boolean>(false);
+    const openModal = () => { setModalOpen(true); }
+    const closeModal = () => { setModalOpen(false); }
 
     const firstInitial = currentUser?.firstName.charAt(0).toUpperCase();
     const lastInitial = currentUser?.lastName.charAt(0).toUpperCase();
@@ -40,11 +45,10 @@ const Dashboard = () => {
                         <strong> Verify your account!</strong> Enjoy all the benefits of Bank 78 when you fully verify
                     </Text>
 
-                    <button>
+                    <button onClick={openModal}>
                         <Text tag={'p'}>
                             Tap to proceed
                         </Text>
-
                     </button>
                 </div>
 
@@ -72,9 +76,8 @@ const Dashboard = () => {
 
                     </div>
                 </div>
-
-
             </section>
+            <DocumentUploadModal isOpen={isModalOpen} onClose={closeModal} />
         </main>
     );
 }

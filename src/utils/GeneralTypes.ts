@@ -10,6 +10,7 @@ export type UserData = {
   lastName: string;
   businessType: string;
   country: string;
+  uploadedFiles?: any;
 };
 
 export type Errors = {

@@ -1,6 +1,5 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { UserData } from '../utils/GeneralTypes';
-
 
 interface AuthContextProps {
   currentUser: UserData | null;
@@ -9,40 +8,38 @@ interface AuthContextProps {
   logout: () => void;
 }
 
-
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
-
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [currentUser, setCurrentUser] = useState<UserData | null>(null);
 
+  useEffect(() => {
+    const storedUser = localStorage.getItem('currentUser');
+    if (storedUser) {
+      setCurrentUser(JSON.parse(storedUser));
+    }
+  }, []);
 
-  //register
   const register = (newUser: UserData) => {
-    const users = JSON.parse(sessionStorage.getItem('users') || '[]');
+    const users = JSON.parse(localStorage.getItem('users') || '[]');
     users.push(newUser);
-    sessionStorage.setItem('users', JSON.stringify(users));
+    localStorage.setItem('users', JSON.stringify(users));
   };
 
-
-
-  // Login user
   const login = (email: string, password: string): boolean => {
-    const users = JSON.parse(sessionStorage.getItem('users') || '[]');
+    const users = JSON.parse(localStorage.getItem('users') || '[]');
     const foundUser = users.find((user: UserData) => user.email === email && user.password === password);
     if (foundUser) {
       setCurrentUser(foundUser);
-      sessionStorage.setItem('currentUser', JSON.stringify(foundUser));
+      localStorage.setItem('currentUser', JSON.stringify(foundUser));
       return true;
     }
     return false;
   };
 
-
-  // Logout user
   const logout = () => {
     setCurrentUser(null);
-    sessionStorage.removeItem('currentUser');
+    localStorage.removeItem('currentUser');
   };
 
   return (
@@ -51,7 +48,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     </AuthContext.Provider>
   );
 };
-
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
