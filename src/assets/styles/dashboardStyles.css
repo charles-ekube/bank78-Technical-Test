@@ -113,6 +113,36 @@
   opacity: 1;
 }
 
+.mb-10 {
+  margin-bottom: 16px;
+}
+
+.previewImage {
+  width: 150px;
+  height: 150px;
+  margin-top: 20px;
+}
+
+.uploadButton {
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 15px;
+  background: #0067c7;
+  color: rgb(255, 255, 255);
+  border-radius: 100px;
+  padding: 14px 50px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0.15px 1.5px 3px 0px;
+  margin: 0px;
+  text-align: center;
+  width: 100%;
+  cursor: pointer;
+  white-space: nowrap;
+  opacity: 1;
+  border: none;
+  margin-top: 20px;
+}
+
 @media screen and (min-width: 768px) {
   .dashNav {
     padding: 20px 60px;

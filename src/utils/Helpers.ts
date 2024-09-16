@@ -26,3 +26,13 @@ export const fileToBase64 = (file: File): Promise<string> => {
     reader.readAsDataURL(file);
   });
 };
+
+export const shortenXterLength = (str: string | null | undefined, num: number = 10): string => {
+  if (str) {
+    if (str.length <= num) {
+      return str;
+    }
+    return `${str.slice(0, num)}..`;
+  }
+  return "";
+};
