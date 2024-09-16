@@ -6,14 +6,17 @@ interface CustomTextProps {
     className?: string;
     children: ReactNode;
     [key: string]: any;
+    color?: string;
+    fs?: string;
+    fw?: number;
 }
 
 const Text = (props: CustomTextProps) => {
-    const { tag = 'span', className, children, ...otherProps } = props
-    const CustomTag: ElementType = tag; // Dynamic tag, default to 'span'
-    const combinedClassName = `text ${className}`.trim(); // Combine class names
+    const { tag = 'span', className, children, color, fs, fw, ...otherProps } = props
+    const CustomTag: ElementType = tag;
+    const combinedClassName = `text ${className}`.trim();
     return (
-        <CustomTag className={combinedClassName} {...otherProps}>
+        <CustomTag className={combinedClassName} {...otherProps} style={{ color: color, fontSize: fs, fontWeight: fw }}>
             {children}
         </CustomTag>
     );

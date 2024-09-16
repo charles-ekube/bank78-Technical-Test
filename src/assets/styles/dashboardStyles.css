@@ -75,6 +75,17 @@
   border: 1px;
   height: 100%;
   min-width: 295px;
+  padding: 20px;
+}
+
+.transactionsCard {
+  background-color: rgb(255, 255, 255);
+  border-radius: 16px;
+  border: 1px;
+  height: 100%;
+  min-width: 295px;
+  margin-top: 40px;
+  padding: 20px;
 }
 
 .documentsModal {
@@ -141,6 +152,46 @@
   opacity: 1;
   border: none;
   margin-top: 20px;
+}
+
+.flexRow {
+  display: flex;
+  flex-direction: row;
+}
+
+.flexWrap {
+  flex-wrap: wrap;
+}
+
+.justifyBetween {
+  justify-content: space-between;
+}
+
+.justifyCenter {
+  justify-content: center;
+}
+
+.alignCenter {
+  align-items: center;
+}
+.gap16 {
+  gap: 16px;
+}
+
+.accountCardButton {
+  border: none;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 15px;
+  border-radius: 6px;
+  padding: 8px 14px;
+  text-align: center;
+  width: 100%;
+  cursor: pointer;
+  white-space: nowrap;
+  opacity: 1;
+  color: #fff;
 }
 
 @media screen and (min-width: 768px) {
